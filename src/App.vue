@@ -4,12 +4,10 @@
   <button @click="handleClick">Click Me</button>
 
   <div v-if="showModal">
-    <ModalComponent
-      :header="header"
-      :text="text"
-      theme="sale"
-      @close="toggleModal"
-    />
+    <ModalComponent theme="sale" @close="toggleModal">
+      <h1>Ninja GiveAway</h1>
+      <p>Grab your Ninja swag for half a price</p>
+    </ModalComponent>
   </div>
   <button @click="toggleModal">Toggle Modal</button>
 </template>
