@@ -3,13 +3,26 @@
   <input type="text" ref="name" />
   <button @click="handleClick">Click Me</button>
 
-  <div v-if="showModal">
+  <teleport to=".modals" v-if="showModal">
     <ModalComponent theme="sale" @close="toggleModal">
       <h1>Ninja GiveAway</h1>
       <p>Grab your Ninja swag for half a price</p>
+      <template v-slot:links>
+        <div class="actions">
+          <a href="#">Sign up now</a>
+          <a href="#">Login</a>
+        </div></template
+      >
     </ModalComponent>
-  </div>
-  <button @click="toggleModal">Toggle Modal</button>
+  </teleport>
+  <teleport to=".modals" v-if="showModalTwo">
+    <ModalComponent @close="toggleModalTwo">
+      <h1>Sign up to the newsletter</h1>
+      <p>For update and promo code</p>
+    </ModalComponent>
+  </teleport>
+  <button @clickteleport="toggleModal">Toggle Modal</button>
+  <button @click="toggleModalTwo">Toggle Modal Two</button>
 </template>
 
 <script>
@@ -24,6 +37,7 @@ export default {
       header: "Sign up for the GiveAway",
       text: "Grab your Ninja Swag for half a Price",
       showModal: false,
+      showModalTwo: false,
     };
   },
   methods: {
@@ -35,12 +49,16 @@ export default {
     toggleModal() {
       this.showModal = !this.showModal;
     },
+    toggleModalTwo() {
+      this.showModalTwo = !this.showModalTwo;
+    },
   },
 };
 </script>
 
 <style>
-#app {
+#app,
+.modals {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
